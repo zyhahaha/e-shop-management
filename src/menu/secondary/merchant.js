@@ -1,11 +1,11 @@
 export default [
     {
         path: '/merchant/store',
-        title: '关联店铺',
+        title: 'aaa',
         header: 'system'
     }, {
         path: '/merchant/config',
-        title: '参数设置',
+        title: 'bbb',
         header: 'system'
     }
 ]

@@ -1,6 +1,6 @@
 // 菜单，侧边栏
 // import dashboard from './modules/dashboard';
-import merchant from './modules/merchant';
+import shop from './modules/shop';
 import permission from './modules/permission';
 
 // 系统
@@ -11,7 +11,7 @@ import secondaryPages from './secondary/index.js'
 
 export default [
     // dashboard,
-    merchant,
+    shop,
     permission,
 
     log,

@@ -32,15 +32,6 @@ export default {
                 title: '人员列表'
             },
             component: () => import('@/pages/permission/staff/index')
-        },
-        {
-            path: 'menu-list',
-            name: `${pre}menu-list`,
-            meta: {
-                ...meta,
-                title: '菜单列表'
-            },
-            component: () => import('@/pages/permission/menu/index')
         }
     ]
 };

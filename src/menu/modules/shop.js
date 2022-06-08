@@ -1,17 +1,16 @@
-const pre = '/merchant/';
+const pre = '/shop/';
 
 export default {
-    path: '/merchant',
+    path: '/shop',
     title: '平台管理',
     header: 'home',
     icon: 'md-speedometer',
-    // auth: ['merchant-list'],
     children: [
         {
-            path: `${pre}list`,
+            path: `${pre}product-list`,
             title: '商品列表'
         }, {
-            path: `${pre}role`,
+            path: `${pre}order-list`,
             title: '订单列表'
         }
     ]

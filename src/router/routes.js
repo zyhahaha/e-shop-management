@@ -1,7 +1,7 @@
 // import dashboard from './modules/dashboard';
 import BasicLayout from '@/layouts/basic-layout';
 
-// import Merchant from './modules/merchant'
+import Shop from './modules/shop'
 import Permission from './modules/permission'
 
 /**
@@ -59,7 +59,7 @@ const frameIn = [
         ]
     },
     // dashboard,
-    // Merchant,
+    Shop,
     Permission
 ];
 
