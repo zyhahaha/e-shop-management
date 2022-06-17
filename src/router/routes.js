@@ -12,7 +12,7 @@ const frameIn = [
     {
         path: '/',
         redirect: {
-            name: 'permission-role-list'
+            name: 'permission-staff-list'
         },
         component: BasicLayout,
         children: [

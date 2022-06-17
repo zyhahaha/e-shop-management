@@ -10,7 +10,7 @@ export default {
     path: '/permission',
     name: '权限设置',
     redirect: {
-        name: `${pre}role-list`
+        name: `${pre}staff-list`
     },
     meta,
     component: BasicLayout,

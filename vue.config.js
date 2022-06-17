@@ -17,7 +17,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/dev-api/': {
-                target: 'http://localhost:3000', // 开发环境
+                target: 'http://121.4.102.246:3000', // 开发环境
                 pathRewrite: {
                     '^/dev-api': ''
                 }
