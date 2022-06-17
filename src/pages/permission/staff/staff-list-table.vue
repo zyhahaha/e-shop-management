@@ -1,14 +1,14 @@
 <template>
     <div class="i-table-dark-header table-list">
         <Table row-key="id" :height="tableHeight" :columns="columns" :data="tableDataList" :loading="loading" stripe>
-            <template slot-scope="{ row, index }" slot="avatar">
+            <template slot-scope="{ row }" slot="avatar">
                 <img :src="checkAvatarImg(row.avatar)" alt="" style="width: 32px; height: 32px; border-radius: 16px;" v-if="row.avatar">
                 <span v-else>-</span>
             </template>
-            <template slot-scope="{ row, index }" slot="status">
+            <template slot-scope="{ row }" slot="status">
                 <span>{{ statusTypeMap[row.status] }}</span>
             </template>
-            <template slot-scope="{ row, index }" slot="createDate">
+            <template slot-scope="{ row }" slot="createDate">
                 <span>{{ row.created_at | filterDateFormat }}</span>
             </template>
             <template slot-scope="{ row, index }" slot="action">
@@ -92,17 +92,8 @@
                 },
                 columns: [
                     {
-                        title: '序号',
-                        type: 'index',
-                        width: 80,
-                        indexMethod: row => {
-                            let rowIndex = row._index + 1
-                            let currentPageWeight = (this.currentPage - 1) * this.pageSize
-                            return rowIndex + currentPageWeight
-                        }
-                    }, {
                         title: '人员名称',
-                        key: 'name',
+                        key: 'username',
                         width: 150
                     }, {
                         title: '头像',
@@ -111,11 +102,11 @@
                         slot: 'avatar'
                     }, {
                         title: '登录账号',
-                        key: 'account',
+                        key: 'username',
                         minWidth: 150
                     }, {
                         title: '联系方式',
-                        key: 'phone',
+                        key: 'mobile',
                         minWidth: 150
                     }, {
                         title: '状态',

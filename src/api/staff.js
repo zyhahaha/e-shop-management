@@ -5,8 +5,7 @@ import request from '@/plugins/request';
  */
 export function StaffListServer (data) {
     return request({
-        // url: '/api/staff/list',
-        url: '/admin/list',
+        url: '/user/list',
         method: 'post',
         data
     });

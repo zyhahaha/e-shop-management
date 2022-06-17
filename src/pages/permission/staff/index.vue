@@ -55,14 +55,14 @@
             },
             getTableData () {
                 let params = {
-                    page: this.currentPage,
-                    limit: this.pageSize
+                    pageIndex: this.currentPage,
+                    pageSize: this.pageSize
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
                 StaffListServer(params).then(res => {
                     this.tableLoading = false
-                    this.dataList = res.data || []
+                    this.dataList = res.list || []
                     this.pageTotal = res.total
                 }).catch(() => {
                     this.tableLoading = false
