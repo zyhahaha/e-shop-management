@@ -3,15 +3,15 @@
         <Card :bordered="false" dis-hover class="i-card-fill-space">
             <div slot="title" class="i-card-title">
                 <img src="@/assets/images/permission/staff-title.png" alt="">
-                人员列表
+                订单列表
             </div>
-            <div slot="extra" class="i-card-extra">
+            <!-- <div slot="extra" class="i-card-extra">
                 <Button type="primary" @click="$refs.staffListTable.onStaffAdd()">
                     <img src="@/assets/images/common/btn-add.png" alt="">
                     新建人员
                 </Button>
-            </div>
-            <StaffListForm @onSearch="onSearch" />
+            </div> -->
+            <!-- <StaffListForm @onSearch="onSearch" /> -->
             <StaffListTable ref="staffListTable" :tableDataList="dataList" :loading="tableLoading" :currentPage="currentPage" :pageSize="pageSize" @onReload="getTableData" />
             <div class="ivu-mt ivu-text-center">
                 <Page :total="pageTotal" :current="currentPage" :page-size="pageSize" @on-change="onPageChange" show-total show-elevator />
@@ -21,11 +21,11 @@
 </template>
 <script>
     import { getTableHeight } from '@/libs/util'
-    import { StaffListServer } from '@/api/staff.js'
+    import { OrderListServer } from '@/api/order.js'
     import StaffListForm from './staff-list-form.vue'
     import StaffListTable from './staff-list-table.vue'
     export default {
-        name: 'StaffList',
+        name: 'OrderList',
         components: {
             StaffListForm,
             StaffListTable
@@ -55,14 +55,14 @@
             },
             getTableData () {
                 let params = {
-                    page: this.currentPage,
-                    limit: this.pageSize
+                    pageIndex: this.currentPage,
+                    pageSize: this.pageSize
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
-                StaffListServer(params).then(res => {
+                OrderListServer(params).then(res => {
                     this.tableLoading = false
-                    this.dataList = res.data || []
+                    this.dataList = res.list || []
                     this.pageTotal = res.total
                 }).catch(() => {
                     this.tableLoading = false
