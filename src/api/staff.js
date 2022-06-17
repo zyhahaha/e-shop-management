@@ -28,7 +28,7 @@ export function StaffInfoServer (data) {
 export function StaffAddServer (data) {
     return request({
         // url: '/api/staff/add',
-        url: '/admin/create',
+        url: '/user/register',
         method: 'post',
         data
     });

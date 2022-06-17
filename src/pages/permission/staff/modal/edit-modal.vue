@@ -100,7 +100,7 @@
             return {
                 loading: false,
                 imageHost: Setting.imageHost,
-                uploadFileUrl: Setting.apiBaseURL + '/admin/upload/upload-image',
+                uploadFileUrl: Setting.apiBaseURL + '/file/upload',
                 avatarPath: '',
                 formData: {
                     staffName: '',
@@ -145,7 +145,7 @@
                 })
             },
             handleSuccess (res) {
-                this.avatarPath = res.fullpath
+                this.avatarPath = res.file_name
                 // this.$Message.success('恭喜批量修改商品价格成功！' + res);
                 // this.getTableData()
             },
@@ -185,13 +185,13 @@
                     }
 
                     let params = {
-                        name: this.formData.staffName,
+                        // name: this.formData.staffName,
                         avatar: this.avatarPath,
-                        account: this.formData.account,
+                        accountName: this.formData.account,
                         password: this.formData.password,
-                        re_password: this.formData.password,
-                        phone: this.formData.phone,
-                        status: this.formData.status ? 1 : 2
+                        repassword: this.formData.password,
+                        mobile: this.formData.phone
+                        // status: this.formData.status ? 1 : 2
                     }
                     if (this.staffId) {
                         params.id = this.staffId
@@ -200,12 +200,8 @@
                     staffServer(params).then(res => {
                         this.loading = false
                         this.isShowDialog = false
-                        if (res) {
-                            this.$Message.success('保存成功')
-                            this.$emit('onReload')
-                        } else {
-                            this.$Message.error('保存失败')
-                        }
+                        this.$Message.success('保存成功')
+                        this.$emit('onReload')
                     }).catch(() => {
                         this.loading = false
                         // this.isShowDialog = false

@@ -65,7 +65,7 @@
             }
         },
         created () {
-            this.initRoleAllList()
+            // this.initRoleAllList()
         },
         methods: {
             initRoleAllList () {
