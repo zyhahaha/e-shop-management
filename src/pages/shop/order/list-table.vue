@@ -1,14 +1,14 @@
 <template>
     <div class="i-table-dark-header table-list">
         <Table row-key="id" :height="tableHeight" :columns="columns" :data="tableDataList" :loading="loading" stripe>
-            <template slot-scope="{ row, index }" slot="avatar">
+            <template slot-scope="{ row }" slot="avatar">
                 <img :src="checkAvatarImg(row.avatar)" alt="" style="width: 32px; height: 32px; border-radius: 16px;" v-if="row.avatar">
                 <span v-else>-</span>
             </template>
-            <template slot-scope="{ row, index }" slot="status">
+            <template slot-scope="{ row }" slot="status">
                 <span>{{ statusTypeMap[row.status] }}</span>
             </template>
-            <template slot-scope="{ row, index }" slot="createDate">
+            <template slot-scope="{ row }" slot="createDate">
                 <span>{{ row.created_at | filterDateFormat }}</span>
             </template>
             <!-- <template slot-scope="{ row, index }" slot="action">

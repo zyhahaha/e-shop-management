@@ -3,16 +3,16 @@
         <Card :bordered="false" dis-hover class="i-card-fill-space">
             <div slot="title" class="i-card-title">
                 <img src="@/assets/images/permission/staff-title.png" alt="">
-                人员列表
+                商品列表
             </div>
             <div slot="extra" class="i-card-extra">
-                <Button type="primary" @click="$refs.staffListTable.onStaffAdd()">
+                <Button type="primary" @click="$refs.ListTable.onStaffAdd()">
                     <img src="@/assets/images/common/btn-add.png" alt="">
-                    新建人员
+                    新建商品
                 </Button>
             </div>
-            <StaffListForm @onSearch="onSearch" />
-            <StaffListTable ref="staffListTable" :tableDataList="dataList" :loading="tableLoading" :currentPage="currentPage" :pageSize="pageSize" @onReload="getTableData" />
+            <ListForm @onSearch="onSearch" />
+            <ListTable ref="ListTable" :tableDataList="dataList" :loading="tableLoading" :currentPage="currentPage" :pageSize="pageSize" @onReload="getTableData" />
             <div class="ivu-mt ivu-text-center">
                 <Page :total="pageTotal" :current="currentPage" :page-size="pageSize" @on-change="onPageChange" show-total show-elevator />
             </div>
@@ -21,14 +21,14 @@
 </template>
 <script>
     import { getTableHeight } from '@/libs/util'
-    import { StaffListServer } from '@/api/staff.js'
-    import StaffListForm from './list-form.vue'
-    import StaffListTable from './list-table.vue'
+    import { ProductListServer } from '@/api/product.js'
+    import ListForm from './list-form.vue'
+    import ListTable from './list-table.vue'
     export default {
-        name: 'StaffList',
+        name: 'ProductList',
         components: {
-            StaffListForm,
-            StaffListTable
+            ListForm,
+            ListTable
         },
         data () {
             return {
@@ -60,9 +60,9 @@
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
-                StaffListServer(params).then(res => {
+                ProductListServer(params).then(res => {
                     this.tableLoading = false
-                    this.dataList = res.data || []
+                    this.dataList = res.list || []
                     this.pageTotal = res.total
                 }).catch(() => {
                     this.tableLoading = false

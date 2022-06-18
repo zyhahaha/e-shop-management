@@ -2,27 +2,23 @@
     <Modal v-model="isShowDialog" :title="title" width="680" @on-visible-change="onVisibleChange">
         <div style="display: flex;">
             <Form ref="staffFormValidate" :label-width="95" label-position="left" style="flex: 1;" :model="formData" :rules="ruleValidate">
-                <FormItem label="人员名称：" prop="staffName">
-                    <Input placeholder="请输入" v-model="formData.staffName"></Input>
+                <FormItem label="商品名称：" prop="name">
+                    <Input placeholder="请输入" v-model="formData.name"></Input>
                 </FormItem>
-                <FormItem label="登陆账号：" prop="account">
-                    <Input placeholder="请输入" v-model="formData.account" v-if="!staffId"></Input>
-                    <span v-else>{{ formData.account }}</span>
+                <FormItem label="价格：" prop="price">
+                    <Input placeholder="请输入" v-model="formData.price"></Input>
                 </FormItem>
-                <FormItem label="密码：" prop="password" v-if="!staffId">
-                    <Input placeholder="请输入" v-model="formData.password"></Input>
-                </FormItem>
-                <FormItem label="状态：" prop="status" v-if="!staffId">
-                    <i-switch v-model="formData.status"></i-switch>
+                <FormItem label="库存：" prop="stock">
+                    <Input placeholder="请输入" v-model="formData.stock"></Input>
                 </FormItem>
 
                 <!-- 联系方式调换位置，这里是为了美观 -->
-                <FormItem label="联系方式：" prop="phone" v-if="staffId">
+                <!-- <FormItem label="联系方式：" prop="phone" v-if="staffId">
                     <Input placeholder="请输入" v-model="formData.phone"></Input>
-                </FormItem>
+                </FormItem> -->
             </Form>
             <Form ref="staffFormValidateRight" :label-width="95" label-position="left" style="flex: 1; margin-left: 20px;" :model="formData" :rules="ruleValidate">
-                <FormItem label="头像：">
+                <FormItem label="商品图片：">
                     <div v-if="avatarPath" style="position: relative; width: 76px;">
                         <!-- <img src="http://wework.qpic.cn/bizmail/I3OYPnAktiaX1BdugRRBpBUFodxTIahA1mbb5ph05iabiazw4XhzZuMpw/0" style="width: 100%;"> -->
                         <img :src="checkAvatarImg(avatarPath)" alt style="width: 100%;" />
@@ -54,9 +50,9 @@
                 </FormItem>
 
                 <!-- 联系方式调换位置，这里是为了美观 -->
-                <FormItem label="联系方式：" prop="phone" v-if="!staffId">
+                <!-- <FormItem label="联系方式：" prop="phone" v-if="!staffId">
                     <Input placeholder="请输入" v-model="formData.phone"></Input>
-                </FormItem>
+                </FormItem> -->
             </Form>
         </div>
 
@@ -69,7 +65,7 @@
 <script>
     import Setting from '@/setting.js'
     import util from '@/libs/util';
-    import { StaffAddServer, StaffEditServer } from '@/api/staff.js'
+    import { ProductAddServer, ProductEditServer } from '@/api/product.js'
     export default {
         name: 'EditModal',
         model: {
@@ -100,24 +96,22 @@
             return {
                 loading: false,
                 imageHost: Setting.imageHost,
-                uploadFileUrl: Setting.apiBaseURL + '/admin/upload/upload-image',
+                uploadFileUrl: Setting.apiBaseURL + '/file/upload',
                 avatarPath: '',
                 formData: {
-                    staffName: '',
-                    account: '',
-                    password: '',
-                    phone: '',
-                    status: true
+                    name: '',
+                    price: '',
+                    stock: ''
                 },
                 ruleValidate: {
-                    account: [
-                        { required: true, message: '账号不能为空', trigger: 'blur' }
+                    name: [
+                        { required: true, message: '商品名称不能为空', trigger: 'blur' }
                     ],
-                    password: [
-                        { required: true, message: '密码不能为空', trigger: 'blur' }
+                    price: [
+                        { required: true, message: '价格不能为空', trigger: 'blur' }
                     ],
-                    phone: [
-                        { required: true, message: '联系方式不能为空', trigger: 'blur' }
+                    stock: [
+                        { required: true, message: '库存不能为空', trigger: 'blur' }
                     ]
                 },
                 avatarDefaultList: []
@@ -145,7 +139,7 @@
                 })
             },
             handleSuccess (res) {
-                this.avatarPath = res.fullpath
+                this.avatarPath = res.file_name
                 // this.$Message.success('恭喜批量修改商品价格成功！' + res);
                 // this.getTableData()
             },
@@ -179,33 +173,29 @@
             },
             async onConfirm () {
                 if (await this.checkFormValidator()) {
-                    let staffServer = StaffAddServer
+                    let staffServer = ProductAddServer
                     if (this.staffId) {
-                        staffServer = StaffEditServer
+                        staffServer = ProductEditServer
                     }
 
                     let params = {
-                        name: this.formData.staffName,
-                        avatar: this.avatarPath,
-                        account: this.formData.account,
-                        password: this.formData.password,
-                        re_password: this.formData.password,
-                        phone: this.formData.phone,
-                        status: this.formData.status ? 1 : 2
+                        // name: this.formData.staffName,
+                        image: this.avatarPath,
+                        name: this.formData.name,
+                        price: this.formData.price,
+                        stock: this.formData.stock
+                        // mobile: this.formData.phone
+                        // status: this.formData.status ? 1 : 2
                     }
                     if (this.staffId) {
                         params.id = this.staffId
                     }
                     this.loading = true
-                    staffServer(params).then(res => {
+                    staffServer(params, params.id).then(res => {
                         this.loading = false
                         this.isShowDialog = false
-                        if (res) {
-                            this.$Message.success('保存成功')
-                            this.$emit('onReload')
-                        } else {
-                            this.$Message.error('保存失败')
-                        }
+                        this.$Message.success('保存成功')
+                        this.$emit('onReload')
                     }).catch(() => {
                         this.loading = false
                         // this.isShowDialog = false
@@ -219,13 +209,10 @@
             onVisibleChange (visible) {
                 if (visible && this.staffId) {
                     this.formData.id = this.staffId
-                    this.formData.staffName = this.staffItemData.name || ''
-                    this.formData.account = this.staffItemData.account || ''
-                    this.formData.password = this.staffItemData.password || ''
-                    this.formData.phone = this.staffItemData.phone || ''
-                    this.formData.status = this.staffItemData.status === 1
-                    this.avatarPath = this.staffItemData.avatar || ''
-                    // delete this.formData.status
+                    this.formData.name = this.staffItemData.name || ''
+                    this.formData.price = this.staffItemData.price || ''
+                    this.formData.stock = this.staffItemData.stock || ''
+                    this.avatarPath = this.staffItemData.image || ''
                 }
                 // 关闭页面的时候清空Form表单
                 if (!visible) {
