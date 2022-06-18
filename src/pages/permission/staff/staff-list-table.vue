@@ -12,15 +12,15 @@
                 <span>{{ row.created_at | filterDateFormat }}</span>
             </template>
             <template slot-scope="{ row, index }" slot="action">
-                <a @click="onStaffEdit(row, index)">编辑</a>
+                <!-- <a @click="onStaffEdit(row, index)">编辑</a>
                 <Divider type="vertical" />
                 <a @click="onRoleRelation(row, index)">关联角色</a>
-                <Divider type="vertical" />
+                <Divider type="vertical" /> -->
                 <a @click="onUpdatePassword(row, index)">修改密码</a>
                 <Divider type="vertical" />
-                <a @click="onUpdateStaffStatus(row, index)" :class="{'i-btn--color__important': row.status === 1}">{{ statusBtnTypeMap[row.status] }}</a>
-                <Divider type="vertical" v-if="row.status === 2" />
-                <a @click="onDeleteStaff(row, index)" class="i-btn--color__important" v-if="row.status === 2">删除</a>
+                <!-- <a @click="onUpdateStaffStatus(row, index)" :class="{'i-btn--color__important': row.status === 1}">{{ statusBtnTypeMap[row.status] }}</a>
+                <Divider type="vertical" v-if="row.status === 2" /> -->
+                <a @click="onDeleteStaff(row, index)" class="i-btn--color__important">删除</a>
             </template>
         </Table>
         <EditModal v-model="editModalVisible" :title="editModalTitle" :staffId="staffId" :staffItemData="staffItemData" @onReload="$emit('onReload')" />
@@ -183,12 +183,8 @@
                         StaffDeleteServer({
                             id: rowData.id
                         }).then(res => {
-                            if (res) {
-                                this.$Message.success('删除成功')
-                                this.$emit('onReload')
-                            } else {
-                                this.$Message.error('删除失败')
-                            }
+                            this.$Message.success('删除成功')
+                            this.$emit('onReload')
                         })
                     }
                 })

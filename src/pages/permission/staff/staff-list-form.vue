@@ -1,23 +1,26 @@
 <template>
     <div>
         <Form inline :label-width="0">
-            <FormItem>
+            <!-- <FormItem>
                 <Input placeholder="请输入人员名称" v-model="staffName" @on-enter="onSearch"></Input>
-            </FormItem>
+            </FormItem> -->
             <FormItem>
                 <Input placeholder="请输入登陆账号" v-model="account" @on-enter="onSearch"></Input>
             </FormItem>
             <FormItem>
                 <Input placeholder="请输入联系方式" v-model="contactType" @on-enter="onSearch"></Input>
             </FormItem>
-            <FormItem>
+            <!-- <FormItem>
                 <Select v-model="staffState" placeholder="请选择状态" clearable style="width: 180px;" @on-change="onSearch">
                     <Option v-for="item in staffStateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
-            </FormItem>
+            </FormItem> -->
 
             <FormItem>
                 <Button type="primary" @click="onSearch">查询</Button>
+            </FormItem>
+            <FormItem>
+                <Button type="primary" @click="onReset">重置</Button>
             </FormItem>
         </Form>
     </div>
@@ -40,7 +43,7 @@
                 let params = {}
                 if (this.staffName) params.name = this.staffName
                 if (this.account) params.account = this.account
-                if (this.contactType) params.phone = this.contactType
+                if (this.contactType) params.mobile = this.contactType
                 if (this.staffState) params.status = this.staffState
 
                 this.$emit('onSearch', params)

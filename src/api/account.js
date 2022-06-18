@@ -27,12 +27,12 @@ export function AccountPasswordSelfEdit (data) {
  * 修改别人的密码
  * @param {string} id id
  * @param {string} password 密码
- * @param {string} re_password 确认密码
+ * @param {string} repassword 确认密码
  */
 export function AccountPasswordEdit (data) {
     return request({
-        url: '/admin/auth/change-password',
-        method: 'post',
+        url: `/user/updatepw/${data.id}`,
+        method: 'patch',
         data
     });
 }

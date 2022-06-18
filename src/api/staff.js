@@ -63,10 +63,9 @@ export function StaffUpdateStatusServer (data) {
  */
 export function StaffDeleteServer (data) {
     return request({
-        // url: '/api/staff/delete',
-        url: '/admin/delete-admin',
-        method: 'post',
-        data
+        url: `/user/${data.id}`,
+        method: 'delete'
+        // data
     });
 }
 

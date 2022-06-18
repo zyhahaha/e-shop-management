@@ -88,11 +88,7 @@
                         this.updatePasswordServer().then(res => {
                             this.loading = false
                             this.isShowDialog = false
-                            if (res) {
-                                this.$Message.success('修改成功')
-                            } else {
-                                this.$Message.error('修改失败')
-                            }
+                            this.$Message.success('修改成功')
                         }).catch(() => {
                             this.loading = false
                             this.isShowDialog = false
@@ -110,7 +106,7 @@
                     return AccountPasswordEdit({
                         id: this.staffId,
                         password: this.formData.newPassword,
-                        re_password: this.formData.confirmPassword
+                        repassword: this.formData.confirmPassword
                     })
                 }
             },
