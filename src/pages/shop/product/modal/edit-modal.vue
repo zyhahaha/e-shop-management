@@ -100,8 +100,8 @@
                 avatarPath: '',
                 formData: {
                     name: '',
-                    price: '',
-                    stock: ''
+                    price: 0,
+                    stock: 0
                 },
                 ruleValidate: {
                     name: [
@@ -182,8 +182,8 @@
                         // name: this.formData.staffName,
                         image: this.avatarPath,
                         name: this.formData.name,
-                        price: this.formData.price,
-                        stock: this.formData.stock
+                        price: Number(this.formData.price),
+                        stock: Number(this.formData.stock)
                         // mobile: this.formData.phone
                         // status: this.formData.status ? 1 : 2
                     }
@@ -210,8 +210,8 @@
                 if (visible && this.staffId) {
                     this.formData.id = this.staffId
                     this.formData.name = this.staffItemData.name || ''
-                    this.formData.price = this.staffItemData.price || ''
-                    this.formData.stock = this.staffItemData.stock || ''
+                    this.formData.price = this.staffItemData.price || 0
+                    this.formData.stock = this.staffItemData.stock || 0
                     this.avatarPath = this.staffItemData.image || ''
                 }
                 // 关闭页面的时候清空Form表单

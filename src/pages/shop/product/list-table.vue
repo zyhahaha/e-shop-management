@@ -2,7 +2,9 @@
     <div class="i-table-dark-header table-list">
         <Table row-key="id" :height="tableHeight" :columns="columns" :data="tableDataList" :loading="loading" stripe>
             <template slot-scope="{ row }" slot="avatar">
-                <img :src="checkAvatarImg(row.avatar)" alt="" style="width: 32px; height: 32px; border-radius: 16px;" v-if="row.avatar">
+                <div v-if="row.image" style="margin: 10px 0px; font-size: 0px;">
+                    <img :src="checkAvatarImg(row.image)" alt="" style="width: 42px; height: 42px;">
+                </div>
                 <span v-else>-</span>
             </template>
             <template slot-scope="{ row }" slot="status">
@@ -88,7 +90,7 @@
                     {
                         title: '商品名称',
                         key: 'name',
-                        width: 150
+                        minWidth: 150
                     }, {
                         title: '商品图片',
                         key: 'avatar',
@@ -97,11 +99,11 @@
                     }, {
                         title: '商品价格',
                         key: 'price',
-                        minWidth: 150
+                        minWidth: 100
                     }, {
                         title: '商品库存',
                         key: 'stock',
-                        minWidth: 150
+                        minWidth: 100
                     }, {
                         title: '创建时间',
                         key: 'created_at',
@@ -172,12 +174,8 @@
                         ProductDeleteServer({
                             id: rowData.id
                         }).then(res => {
-                            if (res) {
-                                this.$Message.success('删除成功')
-                                this.$emit('onReload')
-                            } else {
-                                this.$Message.error('删除失败')
-                            }
+                            this.$Message.success('删除成功')
+                            this.$emit('onReload')
                         })
                     }
                 })
