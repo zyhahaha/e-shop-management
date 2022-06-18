@@ -6,10 +6,15 @@
                 <span v-else>-</span>
             </template>
             <template slot-scope="{ row }" slot="status">
-                <span>{{ statusTypeMap[row.status] }}</span>
+                <span>{{ statusTypeMap[row.order_status] }}</span>
             </template>
             <template slot-scope="{ row }" slot="createDate">
                 <span>{{ row.created_at | filterDateFormat }}</span>
+            </template>
+            <template slot-scope="{ row, index }" slot="action">
+                <a @click="onStaffEdit(row, index)">发货</a>
+                <Divider type="vertical" />
+                <a @click="onDeleteStaff(row, index)" class="i-btn--color__important">删除</a>
             </template>
             <!-- <template slot-scope="{ row, index }" slot="action">
                 <a @click="onStaffEdit(row, index)">编辑</a>
@@ -82,8 +87,10 @@
                 editModalTitle: '新建人员',
 
                 statusTypeMap: {
-                    2: '禁用',
-                    1: '启用'
+                    0: '待付款',
+                    1: '待发货', // 已支付，待发货
+                    2: '待收货',
+                    3: '已完成'
                 },
                 // 按钮取反显示文案
                 statusBtnTypeMap: {
@@ -92,15 +99,6 @@
                 },
                 columns: [
                     {
-                        title: '序号',
-                        type: 'index',
-                        width: 80,
-                        indexMethod: row => {
-                            let rowIndex = row._index + 1
-                            let currentPageWeight = (this.currentPage - 1) * this.pageSize
-                            return rowIndex + currentPageWeight
-                        }
-                    }, {
                         title: '订单编号',
                         key: 'order_no',
                         width: 150
@@ -110,7 +108,7 @@
                         width: 150
                     }, {
                         title: '状态',
-                        key: 'status',
+                        key: 'order_status',
                         width: 100,
                         slot: 'status'
                     }, {
@@ -118,12 +116,11 @@
                         key: 'created_at',
                         minWidth: 180,
                         slot: 'createDate'
-                    },
-                    // {
-                    //     title: '操作',
-                    //     minWidth: 300,
-                    //     slot: 'action'
-                    // }
+                    }, {
+                        title: '操作',
+                        minWidth: 300,
+                        slot: 'action'
+                    }
                 ],
 
                 staffId: 0,
