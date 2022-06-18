@@ -22,8 +22,8 @@
 <script>
     import { getTableHeight } from '@/libs/util'
     import { OrderListServer } from '@/api/order.js'
-    import StaffListForm from './staff-list-form.vue'
-    import StaffListTable from './staff-list-table.vue'
+    import StaffListForm from './list-form.vue'
+    import StaffListTable from './list-table.vue'
     export default {
         name: 'OrderList',
         components: {

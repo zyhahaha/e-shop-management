@@ -11,7 +11,7 @@
             <template slot-scope="{ row, index }" slot="createDate">
                 <span>{{ row.created_at | filterDateFormat }}</span>
             </template>
-            <template slot-scope="{ row, index }" slot="action">
+            <!-- <template slot-scope="{ row, index }" slot="action">
                 <a @click="onStaffEdit(row, index)">编辑</a>
                 <Divider type="vertical" />
                 <a @click="onRoleRelation(row, index)">关联角色</a>
@@ -21,11 +21,11 @@
                 <a @click="onUpdateStaffStatus(row, index)" :class="{'i-btn--color__important': row.status === 1}">{{ statusBtnTypeMap[row.status] }}</a>
                 <Divider type="vertical" v-if="row.status === 2" />
                 <a @click="onDeleteStaff(row, index)" class="i-btn--color__important" v-if="row.status === 2">删除</a>
-            </template>
+            </template> -->
         </Table>
-        <EditModal v-model="editModalVisible" :title="editModalTitle" :staffId="staffId" :staffItemData="staffItemData" @onReload="$emit('onReload')" />
+        <!-- <EditModal v-model="editModalVisible" :title="editModalTitle" :staffId="staffId" :staffItemData="staffItemData" @onReload="$emit('onReload')" />
         <RelationModal v-model="roleRelationModalVisible" :staffId="staffId" @onReload="$emit('onReload')" />
-        <UpdatePwModal v-model="updatePwModalVisible" :staffId="staffId" />
+        <UpdatePwModal v-model="updatePwModalVisible" :staffId="staffId" /> -->
         <!-- <iConfirmDialog v-model="iConfirmVisible" :type="confirmDialogType" :content="confirmDialogContent" /> -->
     </div>
 </template>
@@ -34,19 +34,19 @@
     import Setting from '@/setting.js'
     import filterDateFormat from '@/mixins/filter-date-format.js'
     import { StaffUpdateStatusServer, StaffDeleteServer } from '@/api/staff.js'
-    import EditModal from './modal/edit-modal.vue'
-    import RelationModal from './modal/relation-modal.vue'
-    import UpdatePwModal from '@/components/update-password/index.vue'
+    // import EditModal from './modal/edit-modal.vue'
+    // import RelationModal from './modal/relation-modal.vue'
+    // import UpdatePwModal from '@/components/update-password/index.vue'
     export default {
         name: 'StaffListTable',
         mixins: [
             filterDateFormat
         ],
-        components: {
-            EditModal,
-            RelationModal,
-            UpdatePwModal
-        },
+        // components: {
+        //     EditModal,
+        //     RelationModal,
+        //     UpdatePwModal
+        // },
         computed: {
             ...mapState('admin/layout', [
                 'tableHeight'
@@ -101,22 +101,13 @@
                             return rowIndex + currentPageWeight
                         }
                     }, {
-                        title: '人员名称',
-                        key: 'name',
+                        title: '订单编号',
+                        key: 'order_no',
                         width: 150
                     }, {
-                        title: '头像',
-                        key: 'avatar',
-                        minWidth: 150,
-                        slot: 'avatar'
-                    }, {
-                        title: '登录账号',
-                        key: 'account',
-                        minWidth: 150
-                    }, {
-                        title: '联系方式',
-                        key: 'phone',
-                        minWidth: 150
+                        title: '用户ID',
+                        key: 'user_id',
+                        width: 150
                     }, {
                         title: '状态',
                         key: 'status',
@@ -127,11 +118,12 @@
                         key: 'created_at',
                         minWidth: 180,
                         slot: 'createDate'
-                    }, {
-                        title: '操作',
-                        minWidth: 300,
-                        slot: 'action'
-                    }
+                    },
+                    // {
+                    //     title: '操作',
+                    //     minWidth: 300,
+                    //     slot: 'action'
+                    // }
                 ],
 
                 staffId: 0,

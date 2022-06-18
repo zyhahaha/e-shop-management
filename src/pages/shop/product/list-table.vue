@@ -23,9 +23,9 @@
                 <a @click="onDeleteStaff(row, index)" class="i-btn--color__important" v-if="row.status === 2">删除</a>
             </template>
         </Table>
-        <EditModal v-model="editModalVisible" :title="editModalTitle" :staffId="staffId" :staffItemData="staffItemData" @onReload="$emit('onReload')" />
+        <!-- <EditModal v-model="editModalVisible" :title="editModalTitle" :staffId="staffId" :staffItemData="staffItemData" @onReload="$emit('onReload')" />
         <RelationModal v-model="roleRelationModalVisible" :staffId="staffId" @onReload="$emit('onReload')" />
-        <UpdatePwModal v-model="updatePwModalVisible" :staffId="staffId" />
+        <UpdatePwModal v-model="updatePwModalVisible" :staffId="staffId" /> -->
         <!-- <iConfirmDialog v-model="iConfirmVisible" :type="confirmDialogType" :content="confirmDialogContent" /> -->
     </div>
 </template>
@@ -34,19 +34,19 @@
     import Setting from '@/setting.js'
     import filterDateFormat from '@/mixins/filter-date-format.js'
     import { StaffUpdateStatusServer, StaffDeleteServer } from '@/api/staff.js'
-    import EditModal from './modal/edit-modal.vue'
-    import RelationModal from './modal/relation-modal.vue'
-    import UpdatePwModal from '@/components/update-password/index.vue'
+    // import EditModal from './modal/edit-modal.vue'
+    // import RelationModal from './modal/relation-modal.vue'
+    // import UpdatePwModal from '@/components/update-password/index.vue'
     export default {
         name: 'StaffListTable',
         mixins: [
             filterDateFormat
         ],
-        components: {
-            EditModal,
-            RelationModal,
-            UpdatePwModal
-        },
+        // components: {
+        //     EditModal,
+        //     RelationModal,
+        //     UpdatePwModal
+        // },
         computed: {
             ...mapState('admin/layout', [
                 'tableHeight'
