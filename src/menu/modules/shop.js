@@ -14,6 +14,10 @@ export default {
             path: `${pre}order-list`,
             title: '订单列表',
             icon: 'md-bookmarks'
+        }, {
+            path: `${pre}ispa-list`,
+            title: '数据抓取',
+            icon: 'md-bookmarks'
         }
     ]
 }

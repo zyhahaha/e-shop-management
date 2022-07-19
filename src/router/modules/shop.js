@@ -32,6 +32,14 @@ export default {
                 title: '订单管理'
             },
             component: () => import('@/pages/shop/order/index')
+        }, {
+            path: 'ispa-list',
+            name: `${pre}ispa-list`,
+            meta: {
+                ...meta,
+                title: '数据抓取'
+            },
+            component: () => import('@/pages/shop/ispa/index')
         }
     ]
 };
