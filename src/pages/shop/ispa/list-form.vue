@@ -18,7 +18,7 @@
             </FormItem>
             <FormItem>
                 <Upload ref="upload" style="display: inline;" :action="uploadFileUrl" :headers="headers" name="file" :on-format-error="handleFormatError" :on-success="handleSuccess" :on-error="handleError" :format="['xlsx','xls']" :show-upload-list="false">
-                    <Button type="primary" ghost>上传关联单品</Button>
+                    <Button type="primary" ghost>上传表格</Button>
                 </Upload>
             </FormItem>
         </Form>
@@ -34,7 +34,7 @@
                 uploadFileUrl: Setting.apiBaseURL + '/spider/ispa/upload',
                 name: '',
                 status: '',
-                statusTypes: [{ label: '未处理', value: 0 }, { label: '存在', value: 1 }, { label: '不存在', value: 2 }]
+                statusTypes: [{ label: '未处理', value: 0 }, { label: '已存在', value: 1 }, { label: '不存在', value: 2 }]
             }
         },
         computed: {
@@ -64,7 +64,7 @@
             onSearch () {
                 let params = {}
                 if (this.name) params.name = this.name
-                if (this.status) params.status = this.status
+                if (typeof this.status === 'number') params.status = this.status
 
                 this.$emit('onSearch', params)
             },

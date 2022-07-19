@@ -1,9 +1,6 @@
 <template>
     <div class="i-table-dark-header table-list">
         <Table row-key="id" :height="tableHeight" :columns="columns" :data="tableDataList" :loading="loading" stripe>
-            <template slot-scope="{ row }" slot="status">
-                <span>{{ statusTypeMap[row.status] }}</span>
-            </template>
             <template slot-scope="{ row }" slot="updateTime">
                 <span>{{ row.updateTime | filterDateFormat }}</span>
             </template>
@@ -52,17 +49,26 @@
             return {
                 imageHost: Setting.imageHost,
 
-                statusMap: {
-                    0: '正在刷新',
-                    1: '已存在',
-                    2: '不存在'
-                },
                 columns: [
                     {
                         title: '状态',
                         width: 150,
                         render: (h, params) => {
-                            return h('span', this.statusMap[params.row.status])
+                            const colorDict = {
+                                0: '#83879A',
+                                1: '#1AC188',
+                                2: '#FF7440'
+                            }
+                            const statusMap = {
+                                0: '未刷新',
+                                1: '已存在',
+                                2: '不存在'
+                            }
+                            return h('span', {
+                                style: {
+                                    color: colorDict[params.row.status]
+                                }
+                            }, statusMap[params.row.status])
                         }
                     }, {
                         title: 'SKU',
