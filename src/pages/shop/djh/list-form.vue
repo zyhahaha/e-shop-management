@@ -21,17 +21,28 @@
                     <Button type="primary" ghost>上传表格</Button>
                 </Upload>
             </FormItem>
+
+            <FormItem>
+                <Button type="primary" @click="onAddCookie">添加Cookie</Button>
+            </FormItem>
         </Form>
+
+        <AddCookieModal v-model="addModalVisible" @onReload="$emit('onReload')" />
     </div>
 </template>
 <script>
     import Setting from '@/setting.js'
     import util from '@/libs/util';
+    import AddCookieModal from './modal/add-cookie-modal.vue'
     export default {
         name: 'ListForm',
+        components: {
+            AddCookieModal
+        },
         data () {
             return {
                 uploadFileUrl: Setting.apiBaseURL + '/spider/djh/upload',
+                addModalVisible: false,
                 name: '',
                 status: '',
                 statusTypes: [{ label: '未处理', value: 0 }, { label: '已存在', value: 1 }, { label: '不存在', value: 2 }, { label: '处理失败', value: 9 }]
@@ -61,6 +72,9 @@
                 this.$Message.error('数据导入失败！' + response.message)
             },
             // 基础操作
+            onAddCookie(){
+                this.addModalVisible = true
+            },
             onSearch () {
                 let params = {}
                 if (this.name) params.name = this.name
