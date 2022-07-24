@@ -40,6 +40,14 @@ export default {
                 title: '数据抓取'
             },
             component: () => import('@/pages/shop/ispa/index')
+        }, {
+            path: 'djh-list',
+            name: `${pre}djh-list`,
+            meta: {
+                ...meta,
+                title: '数据抓取DJH'
+            },
+            component: () => import('@/pages/shop/djh/index')
         }
     ]
 };

@@ -18,6 +18,10 @@ export default {
             path: `${pre}ispa-list`,
             title: '数据抓取',
             icon: 'md-bookmarks'
+        }, {
+            path: `${pre}djh-list`,
+            title: '数据抓取DJH',
+            icon: 'md-bookmarks'
         }
     ]
 }
