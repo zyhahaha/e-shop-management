@@ -85,15 +85,15 @@
         },
         methods: {
             async onConfirm () {
-                this.$refs['staffFormValidateRight'].validate(async valid => {
+                this.$refs['staffFormValidate'].validate(async valid => {
                     if (valid) {
                         let params = {
                             domain: 'djh',
                             cookie: this.formData.cookie
                         }
                         this.loading = true
-                        await DjhVerifyCookieServer(params)
-                        DjhVerifyCookieServer(params).then(res => {
+                        await DjhVerifyCookieServer(params).finally(() => { this.loading = false })
+                        DjhAddCookieServer(params).then(res => {
                             this.loading = false
                             this.isShowDialog = false
                             this.$Message.success('保存成功')
