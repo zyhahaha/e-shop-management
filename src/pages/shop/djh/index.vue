@@ -35,7 +35,7 @@
                 tableLoading: false,
                 dataList: [],
                 currentPage: 1,
-                pageSize: 20,
+                pageSize: 100,
                 pageTotal: 100,
                 queryData: {}
             }

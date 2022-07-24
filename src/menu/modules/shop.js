@@ -16,11 +16,11 @@ export default {
             icon: 'md-bookmarks'
         }, {
             path: `${pre}ispa-list`,
-            title: '数据抓取',
+            title: '数据抓取(超市)',
             icon: 'md-bookmarks'
         }, {
             path: `${pre}djh-list`,
-            title: '数据抓取DJH',
+            title: '数据抓取(招商)',
             icon: 'md-bookmarks'
         }
     ]

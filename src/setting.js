@@ -43,7 +43,7 @@ const Setting = {
      * 布局配置
      * */
     // 侧边菜单宽度，单位 px，不可动态修改，需与 setting.less 的 @menuSideWidth 保持一致
-    menuSideWidth: 190,
+    menuSideWidth: 220,
     layout: {
         // 侧边栏风格，可选值为 dark 或 light
         siderTheme: 'dark',

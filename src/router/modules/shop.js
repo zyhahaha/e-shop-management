@@ -37,7 +37,7 @@ export default {
             name: `${pre}ispa-list`,
             meta: {
                 ...meta,
-                title: '数据抓取'
+                title: '数据抓取(超市)'
             },
             component: () => import('@/pages/shop/ispa/index')
         }, {
@@ -45,7 +45,7 @@ export default {
             name: `${pre}djh-list`,
             meta: {
                 ...meta,
-                title: '数据抓取DJH'
+                title: '数据抓取(招商)'
             },
             component: () => import('@/pages/shop/djh/index')
         }
