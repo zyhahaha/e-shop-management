@@ -63,8 +63,11 @@
                 })
             },
             handleSuccess (res) {
-                this.$Message.success('导入成功！' + res.message);
-                // this.uploadErrorRecordList = res.failed_list || []
+                if (res && res.code === 500) {
+                    this.$Message.error('导入失败！' + res.msg);
+                } else {
+                    this.$Message.success('导入成功！');
+                }
                 this.$emit('onReload')
             },
             // eslint-disable-next-line handle-callback-err
