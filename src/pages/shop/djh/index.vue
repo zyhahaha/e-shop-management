@@ -21,7 +21,7 @@
 </template>
 <script>
     import { getTableHeight } from '@/libs/util'
-    import { IspaListServer } from '@/api/ispa.js'
+    import { DjhListServer } from '@/api/ispa.js'
     import ListForm from './list-form.vue'
     import ListTable from './list-table.vue'
     export default {
@@ -60,7 +60,7 @@
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
-                IspaListServer(params).then(res => {
+                DjhListServer(params).then(res => {
                     this.tableLoading = false
                     this.dataList = res.list || []
                     this.pageTotal = res.total
