@@ -13,9 +13,9 @@
             <FormItem>
                 <Button type="primary" @click="onSearch">查询</Button>
             </FormItem>
-            <FormItem>
+            <!-- <FormItem>
                 <Button type="primary" @click="onReset">重置</Button>
-            </FormItem>
+            </FormItem> -->
             <FormItem>
                 <Upload ref="upload" style="display: inline;" :action="uploadFileUrl" :headers="headers" name="file" :on-format-error="handleFormatError" :on-success="handleSuccess" :on-error="handleError" :format="['xlsx','xls']" :show-upload-list="false">
                     <Button type="primary" ghost>上传表格</Button>
@@ -24,6 +24,10 @@
 
             <FormItem>
                 <Button type="primary" @click="onAddCookie">添加Cookie</Button>
+            </FormItem>
+
+            <FormItem>
+                <Button type="primary" ghost @click="onExport">导出</Button>
             </FormItem>
         </Form>
 
@@ -75,7 +79,7 @@
                 this.$Message.error('数据导入失败！' + response.message)
             },
             // 基础操作
-            onAddCookie(){
+            onAddCookie () {
                 this.addModalVisible = true
             },
             onSearch () {
@@ -89,7 +93,9 @@
                 this.resetData()
                 this.$emit('onSearch', {})
             },
-            onExport () { },
+            onExport () {
+                this.$emit('onExport')
+            },
             resetData () {
                 this.name = ''
                 this.status = ''

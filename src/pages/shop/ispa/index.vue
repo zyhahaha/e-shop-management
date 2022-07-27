@@ -11,7 +11,7 @@
                     新建商品
                 </Button>
             </div> -->
-            <ListForm @onSearch="onSearch" />
+            <ListForm @onSearch="onSearch" @onExport="onExport" />
             <ListTable ref="ListTable" :tableDataList="dataList" :loading="tableLoading" :currentPage="currentPage" :pageSize="pageSize" @onReload="getTableData" />
             <div class="ivu-mt ivu-text-center">
                 <Page :total="pageTotal" :current="currentPage" :page-size="pageSize" @on-change="onPageChange" show-total show-elevator />
@@ -67,6 +67,47 @@
                 }).catch(() => {
                     this.tableLoading = false
                 })
+            },
+            onExport () {
+                this.handleExport(this.dataList)
+            },
+            handleExport (exportData) {
+                let exportColumns = [
+                    {
+                        title: 'sku',
+                        key: 'sku'
+                    }, {
+                        title: '商品名称',
+                        key: 'name'
+                    }, {
+                        title: '状态',
+                        key: '_status'
+                    }
+                ]
+                require.ensure([], () => {
+                    const { export_json_to_excel } = require('@/libs/export/Export2Excel');
+                    let titles = [];
+                    let keys = [];
+                    exportColumns.forEach(item => {
+                        titles.push(item.title);
+                        keys.push(item.key);
+                    })
+                    exportData.forEach((item, index) => {
+                        const statusMap = {
+                            0: '未刷新',
+                            1: '已存在',
+                            2: '不存在'
+                        }
+                        item._status = statusMap[item.status]
+                    })
+                    const tHeader = titles;
+                    const data = this.formatJson(keys, exportData);
+                    const fileName = '超市商品列表';
+                    export_json_to_excel(tHeader, data, fileName);
+                });
+            },
+            formatJson (filterVal, jsonData) {
+                return jsonData.map((v) => filterVal.map((j) => v[j]));
             },
             onPageChange (currentPage) {
                 this.currentPage = currentPage
