@@ -69,7 +69,18 @@
                 })
             },
             onExport () {
-                this.handleExport(this.dataList)
+                let params = {
+                    pageIndex: 1,
+                    pageSize: 99999
+                }
+                Object.assign(params, this.queryData)
+                this.tableLoading = true
+                DjhListServer(params).then(res => {
+                    const resAllList = res.list || []
+                    this.handleExport(resAllList)
+                }).finally(() => {
+                    this.tableLoading = false
+                })
             },
             handleExport (exportData) {
                 let exportColumns = [
