@@ -22,6 +22,10 @@ export default {
             path: `${pre}djh-list`,
             title: '数据抓取(招商)',
             icon: 'md-bookmarks'
+        }, {
+            path: `${pre}jdvsp-list`,
+            title: '数据抓取(慧采)',
+            icon: 'md-bookmarks'
         }
     ]
 }

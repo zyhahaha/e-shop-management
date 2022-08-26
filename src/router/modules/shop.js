@@ -48,6 +48,14 @@ export default {
                 title: '数据抓取(招商)'
             },
             component: () => import('@/pages/shop/djh/index')
+        }, {
+            path: 'jdvsp-list',
+            name: `${pre}jdvsp-list`,
+            meta: {
+                ...meta,
+                title: '数据抓取(慧采)'
+            },
+            component: () => import('@/pages/shop/jdvsp/index')
         }
     ]
 };
