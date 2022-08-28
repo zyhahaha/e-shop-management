@@ -12,17 +12,6 @@ export function IspaListServer (data) {
 }
 
 /**
- * JDVSP数据列表
- */
- export function JdvspListServer (data) {
-    return request({
-        url: '/spider/jdvsp/list',
-        method: 'post',
-        data
-    });
-}
-
-/**
  * DJH数据列表
  */
  export function DjhListServer (data) {

@@ -45,7 +45,7 @@
         // },
         data () {
             return {
-                uploadFileUrl: Setting.apiBaseURL + '/spider/djh/upload',
+                uploadFileUrl: Setting.apiBaseURL + '/spider/jdvsp/upload',
                 // addModalVisible: false,
                 name: '',
                 status: '',

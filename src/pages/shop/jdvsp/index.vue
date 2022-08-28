@@ -3,7 +3,7 @@
         <Card :bordered="false" dis-hover class="i-card-fill-space">
             <div slot="title" class="i-card-title">
                 <img src="@/assets/images/permission/staff-title.png" alt="">
-                数据抓取(招商)
+                数据抓取(慧采)
             </div>
             <!-- <div slot="extra" class="i-card-extra">
                 <Button type="primary" @click="$refs.ListTable.onStaffAdd()">
@@ -21,7 +21,7 @@
 </template>
 <script>
     import { getTableHeight } from '@/libs/util'
-    import { DjhListServer } from '@/api/ispa.js'
+    import { JdvspListServer } from '@/api/ispa.js'
     import ListForm from './list-form.vue'
     import ListTable from './list-table.vue'
     export default {
@@ -60,7 +60,7 @@
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
-                DjhListServer(params).then(res => {
+                JdvspListServer(params).then(res => {
                     this.tableLoading = false
                     this.dataList = res.list || []
                     this.pageTotal = res.total
@@ -75,7 +75,7 @@
                 }
                 Object.assign(params, this.queryData)
                 this.tableLoading = true
-                DjhListServer(params).then(res => {
+                JdvspListServer(params).then(res => {
                     const resAllList = res.list || []
                     this.handleExport(resAllList)
                 }).finally(() => {
