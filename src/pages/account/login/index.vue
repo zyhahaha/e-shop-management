@@ -27,6 +27,7 @@
                 </div>
             </div>
         </div>
+        <Copyright />
     </div>
 </template>
 <script>
@@ -36,9 +37,11 @@
     import Setting from '@/setting'
     import getFirstMenuPath from '../get-menu-path.js'
     // components
+    import Copyright from '../copyright.vue'
 
     export default {
         components: {
+            Copyright
         },
         data () {
             return {
